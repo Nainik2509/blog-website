@@ -1,16 +1,28 @@
-import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router';
-import App from './App';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
 import './index.css';
+import Home from './pages/home/Home.jsx';
+import SingleBlog from './pages/blogs/SingleBlog.jsx';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 
-let router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    children: [
+      {
+        path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/blogs/:id',
+        element: <SingleBlog />,
+      },
+    ],
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />,
 );
 
